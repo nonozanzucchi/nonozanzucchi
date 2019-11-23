@@ -1,0 +1,147 @@
+#ifndef MAIN_H_INCLUDED
+#define MAIN_H_INCLUDED
+//trouve grace au site http://ressources.unisciel.fr/langagec/co/Type_booleen.html
+typedef int bool ;  //définition du type booleen,
+#define false  0 // faux si a tuile est libre
+#define true  1 //vrai si la tuile est utilisee
+
+typedef struct joueur{
+    char pseudo[16]; //Blinder pour pseudo de max 15 charactères (histoire de pas déborder)
+    char main[6]; //La main ne peut pas dépasser 6 tuiles
+    int scoreTour;
+    int scoreTotal;
+}t_joueur;
+
+
+typedef struct tuile{
+    char *tcoulleur;
+    char *tforme;
+    bool utilisee;
+}t_tuile;
+
+
+
+
+// Nom du sous-programme : COLOR
+// Rôle : change la couleur du texte dans la console, ainsi que la couleur du fond pour la ligne
+// Compatibilité : windows XP
+
+void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de couleurs
+{
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
+    /*
+    0 : Noir
+    1 : Bleu foncé
+    2 : Vert foncé
+    3 : Turquoise
+    4 : Rouge foncé
+    5 : Violet
+    6 : Vert caca d'oie
+    7 : Gris clair
+    8 : Gris foncé
+    9 : Bleu fluo
+    10 : Vert fluo
+    11 : Turquoise
+    12 : Rouge fluo
+    13 : Violet 2
+    14 : Jaune
+    15 : Blanc
+    */
+}
+void reglesJeu()
+{
+    printf("\t\t\tBUT DU JEU :\n");
+    printf("L'ojectif est d'aligner des tuiles ayant des symboles de formes ou de couleurs identiques (mais pas les 2) de facon a realiser des combinaisons rapportant un maximun de points\n\n");
+    printf("\t\t\tLE CALCUL DE POINTS :\n");
+    printf("blabla\n\n");
+    printf("\t\t\tDEROULEMENT DE LA PARTIE :\n");
+    printf("blabla\n\n");
+    printf("\t\t\tASTUCES STRATEGIQUES :\n");
+    printf("Comptez les tuiles. Par exemple, si vous attendez un rond jaune, verifiez qu ils n aient pas ete tous joues (il y a 3 ronds jaunes pour le mode normale et 1 seul pour le mode degrade dans le jeu).\n");
+    printf("Essayez de jouer des tuiles s’inserant dans plusieurs lignes à la fois. Essayez de ne pas creer de lignes de cinq tuiles car vous donnez a votre adversaire l’occasion de faire un Qwirkle et de marquer un nombre eleve de points (bonus de 6 points).\n\n");
+    printf("\t\t\tFIN DE PARTIE :\n");
+    printf("A la fin d’un tour :\n");
+    printf("Apres que tous les joueurs ont pu jouer leur coup, le jeu offre la possibilite de continuer pour le tour suivant ou de terminer la partie. Si les joueurs decident d’arreter, le jeu propose d’enregistrer le jeu en l’etat (toutes les infos necessaires) pour une reprise ulterieure, ou pas.\n");
+    printf("Quand la pioche ne contient plus de tuile les joueurs continuent a jouer normalement mais ne tirent plus de tuile a la fin de leur tour. Le premier joueur qui utilise toutes ses tuiles termine la partie et obtient 6 points supplementaires. Si aucun joueur ne peut ajouter de tuile aux lignes existantes et que la reserve (pioche) est vide, le jeu s’arrete immediatement à la fin du tour et les 6 points de bonus ne sont pas attribues.\n");
+    printf("Le joueur ayant le plus grand nombre de points remporte la partie, l’ordinateur affiche le pseudo et le score de tous les joueurs de la partie.\n\n");
+//d'apres le pdf projet inge 1 : https://pedago-ece.campusonline.me/mod/resource/view.php?id=13856
+
+}
+
+
+void nouvellePartie ()
+{
+    int mode=0,joueurs=0,i=0;
+    t_joueur *J=NULL;
+    do{
+    printf("Quel mode de jeux voulez vous ?\n1.Mode normal \n2.Mode degrade\nTapez sur 1 pour le mode normal et 2 pour le mode degrade");
+    scanf("%d",&mode);
+    }while((mode>3) && (mode<0));//blindage de la saisi du mode de jeu
+
+    do{
+    printf("Quel est le nombre de joueurs ? ");
+    scanf("%d",&joueurs);
+    }while((joueurs>5) && (joueurs<1));//blindage du nombre de joueur
+
+    for(i=0;i==joueurs;i++)//boucle joueur
+    {
+        printf("Saisissez le pseudo du joueur n°%d :",i);
+        scanf("%s",J->pseudo);
+    }
+}
+
+void chargerPartie()
+{
+
+}
+
+void scoreboard ()
+{
+
+}
+
+void ZoneDeJeu ()
+{
+    char zoneJeu[12][26]={ };
+
+}
+
+void afficherPlateau(char plateau[12][26])
+{
+    int i=0,j=0;
+    printf("A B C D E F G H I J K L");
+    for (i=0;i<12;i++)
+    {
+        printf("_");
+        for(j=0;j<26;i++)
+        {
+            printf("|%c",plateau[i][j]);
+        }
+    }
+}
+
+void afficherMain(int joueur)
+{
+    t_joueur player;
+   printf("%s\n %s\n %d\t%d\n",player.pseudo,player.main,player.scoreTotal,player.scoreTour);
+}
+
+void pieceDeJeu()
+{
+    int i=0;
+    t_tuile  pieceJeu[36];
+    /*pieceJeu[0]=0xDB;//carre
+    pieceJeu[1]=0x05;//trefle
+    pieceJeu[2]=0x06;//pique
+    pieceJeu[3]=0x07;//rond
+    pieceJeu[4]=0x03;//coeur
+    pieceJeu[5]=0x04;//losange
+*/
+    for(i=0;i<6;i++)
+    {
+        printf("%c",pieceJeu[i]);
+    }
+}
+
+#endif // MAIN_H_INCLUDED
